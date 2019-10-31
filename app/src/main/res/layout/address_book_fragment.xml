@@ -5,9 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.addressbook.AddressBookFragment">
 
-    <TextView
+    <include
+        layout="@layout/empty_view"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="match_parent" />
+
 
 </FrameLayout>
