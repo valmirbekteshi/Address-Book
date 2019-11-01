@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.valmirb.addressbook.db.dao.ContactDao
 import com.valmirb.addressbook.db.entity.Contact
 
-@Database(entities = [Contact::class], version = 1)
+@Database(entities = [Contact::class], version = 1,exportSchema = false)
 abstract class ContactDatabase : RoomDatabase(){
 
     abstract fun contactDao(): ContactDao

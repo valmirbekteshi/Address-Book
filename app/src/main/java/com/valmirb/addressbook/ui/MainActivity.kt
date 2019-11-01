@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
@@ -15,12 +17,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navcontroller: NavController
     private  var menuOption: Menu?= null
+    private lateinit var shareViewModel: ShareViewModel
+
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        shareViewModel = ViewModelProviders.of(this).get(ShareViewModel::class.java)
+
         navcontroller  = Navigation.findNavController(this,R.id.nav_host_fragment)
         NavigationUI.setupActionBarWithNavController(this,navcontroller)
 
@@ -42,6 +48,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -51,6 +59,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         menuOption = menu
+        (  menuOption?.findItem(R.id.search)?.actionView as SearchView).setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                shareViewModel.onSearchLiveData.postValue(p0)
+                return true
+            }
+
+        })
         return true
     }
 

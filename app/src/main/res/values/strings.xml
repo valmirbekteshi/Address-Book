@@ -9,4 +9,5 @@
     <string name="no_contacts">No Contacts</string>
     <string name="no_contacts_subtitle">Use the \'+\' icon to add a new contact</string>
     <string name="ex_contact_name">Valmir Bekteshi</string>
+    <string name="save">Save</string>
 </resources>

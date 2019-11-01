@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.valmirb.addressbook.db.entity.Contact
+import io.reactivex.Flowable
 
 @Dao
 interface ContactDao {
@@ -23,9 +24,8 @@ interface ContactDao {
     @Query("SELECT * FROM contacts_table WHERE id like :contactId")
     fun getContactById(contactId: Int): LiveData<Contact>
 
-
-
-
+    @Query("SELECT * FROM contacts_table WHERE name like '%' || :name || '%'")
+    fun searchContactByName(name: String): Flowable<List<Contact>>
 
 }
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import com.valmirb.addressbook.db.ContactDatabase
 import com.valmirb.addressbook.db.dao.ContactDao
 import com.valmirb.addressbook.db.entity.Contact
+import io.reactivex.Flowable
 
 
 class ContactRepository(application: Application){
@@ -32,17 +33,22 @@ class ContactRepository(application: Application){
     }
 
 
+    fun searchContactByName(name: String): Flowable<List<Contact>>{
+        return contactDao.searchContactByName(name)
+    }
+
+
     private class InsertContactAsync(val contactDao: ContactDao) : AsyncTask<Contact, Unit, Unit>() {
 
-        override fun doInBackground(vararg note: Contact?) {
-            contactDao.insert(note[0]!!)
+        override fun doInBackground(vararg contact: Contact?) {
+            contactDao.insert(contact[0]!!)
         }
     }
 
 
     private class DeleteAllContactsAsyncTask(val contactDao: ContactDao) : AsyncTask<Contact, Unit, Unit>() {
 
-        override fun doInBackground(vararg note: Contact?) {
+        override fun doInBackground(vararg contact: Contact?) {
             contactDao.deleteAllContacts()
         }
     }

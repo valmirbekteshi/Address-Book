@@ -12,10 +12,6 @@ import kotlinx.android.synthetic.main.add_contact_fragment.*
 
 class AddContactFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = AddContactFragment()
-    }
-
     private lateinit var viewModel: AddContactViewModel
 
     override fun onCreateView(
@@ -35,9 +31,8 @@ class AddContactFragment : Fragment() {
             val email = contact_email.text.toString()
             val phone = contact_phonenumber.text.toString()
             val address = contact_address.text.toString()
+            val contact = Contact(firsName, lastName, email, Integer.valueOf(phone), address)
 
-            val contact =
-                Contact(firsName, lastName, email, Integer.valueOf(phone), address)
             viewModel.insert(contact)
             activity?.onBackPressed()
         }

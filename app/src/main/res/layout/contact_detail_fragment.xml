@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="Hello"
-        android:textSize="16sp"
+        android:text="@string/first_name"
+        android:textSize="@dimen/contact_detail_text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,9 +23,9 @@
         android:id="@+id/view_name"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#ccc"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:background="#ccc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/contact_name_detail" />
@@ -36,10 +36,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        tools:text="surname"
-        android:textSize="16sp"
+        android:textSize="@dimen/contact_detail_text_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_name" />
+        app:layout_constraintTop_toBottomOf="@+id/view_name"
+        tools:text="@string/last_name" />
 
 
     <View
@@ -47,8 +47,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="10dp"
-        android:background="#ccc"
         android:layout_marginTop="10dp"
+        android:background="#ccc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/contact_lastname_detail" />
@@ -59,23 +59,22 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        tools:text="email"
-        android:textSize="16sp"
+        android:textSize="@dimen/contact_detail_text_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_surname" />
+        app:layout_constraintTop_toBottomOf="@+id/view_surname"
+        tools:text="@string/email" />
 
 
     <View
         android:id="@+id/view_email"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#ccc"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:background="#ccc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/contact_email_detail" />
-
 
 
     <TextView
@@ -84,18 +83,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        tools:text="0232323"
-        android:textSize="16sp"
+        android:textSize="@dimen/contact_detail_text_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_email" />
+        app:layout_constraintTop_toBottomOf="@+id/view_email"
+        tools:text="@string/phonenumber" />
 
     <View
         android:id="@+id/view_phone"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#ccc"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:background="#ccc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/contact_phonenumber_detail" />
@@ -107,19 +106,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        tools:text="address"
-        android:textSize="16sp"
+        android:textSize="@dimen/contact_detail_text_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/view_phone"
+        tools:text="@string/address" />
 
 
     <View
         android:id="@+id/view_address"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#ccc"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:background="#ccc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/contact_address_detail" />
