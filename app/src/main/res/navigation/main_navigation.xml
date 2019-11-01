@@ -13,9 +13,28 @@
         <action
             android:id="@+id/action_addressBookFragment_to_addContactFragment"
             app:destination="@id/addContactFragment" />
+        <action
+            android:id="@+id/action_addressBookFragment_to_contactDetailFragment"
+            app:destination="@id/contactDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addContactFragment"
         android:name="com.valmirb.addressbook.ui.addcontact.AddContactFragment"
         android:label="Add Contact" />
+    <fragment
+        android:id="@+id/contactDetailFragment"
+        android:name="com.valmirb.addressbook.ui.contactdetail.ContactDetailFragment"
+        android:label="{contactName}"
+        tools:layout="@layout/contact_detail_fragment">
+        <argument
+            android:name="contactId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+
+        <argument
+            android:name="contactName"
+            android:defaultValue="John"
+            app:argType="string" />
+
+    </fragment>
 </navigation>

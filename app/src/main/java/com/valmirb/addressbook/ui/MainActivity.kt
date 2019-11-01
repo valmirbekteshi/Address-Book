@@ -14,6 +14,8 @@ import com.valmirb.addressbook.R
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navcontroller: NavController
+    private  var menuOption: Menu?= null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +24,23 @@ class MainActivity : AppCompatActivity() {
         navcontroller  = Navigation.findNavController(this,R.id.nav_host_fragment)
         NavigationUI.setupActionBarWithNavController(this,navcontroller)
 
+        navcontroller.addOnDestinationChangedListener { controller, destination, arguments ->
 
+            navcontroller.addOnDestinationChangedListener { _, destination, _ ->
+                if(destination.id == R.id.contactDetailFragment || destination.id == R.id.addContactFragment){
+                    menuOption?.let {
+                        it.findItem(R.id.search).setVisible(false)
+                        it.findItem(R.id.add_contact).setVisible(false)
+                    }
+                } else {
+                    menuOption?.let {
+                        it.findItem(R.id.search).setVisible(true)
+                        it.findItem(R.id.add_contact).setVisible(true)
+
+                    }
+                }
+            }
+        }
 
     }
 
@@ -32,16 +50,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+        menuOption = menu
         return true
     }
 
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-
-        navcontroller.addOnDestinationChangedListener { _, destination, _ ->
-            item?.isVisible = destination.id != R.id.addContactFragment
-        }
-
         return when (item?.itemId) {
             R.id.add_contact -> {
 
@@ -53,4 +67,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 }

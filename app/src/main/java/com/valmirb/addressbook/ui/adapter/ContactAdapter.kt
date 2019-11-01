@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.valmirb.addressbook.R
-import com.valmirb.addressbook.model.Contact
+import com.valmirb.addressbook.db.entity.Contact
 import kotlinx.android.synthetic.main.item_contact.view.*
 
-class ContactAdapter(val context: Context) : RecyclerView.Adapter<ContactAdapter.ContactHolder>(){
+class ContactAdapter(val context: Context, var listener: Listener) : RecyclerView.Adapter<ContactAdapter.ContactHolder>(){
 
-    val contactList : List<Contact> = ArrayList()
+    var contactList : MutableList<Contact> = mutableListOf()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactHolder {
@@ -32,7 +32,23 @@ class ContactAdapter(val context: Context) : RecyclerView.Adapter<ContactAdapter
     inner class ContactHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bind(contact: Contact){
             itemView.contactName.text = contact.name
+            itemView.setOnClickListener{listener.onClickItem(contact)}
         }
     }
 
+
+    fun addContacts(list: List<Contact>){
+        contactList.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    fun clear() {
+        contactList.clear()
+        notifyDataSetChanged()
+    }
+
+
+    interface Listener{
+        fun onClickItem(model:Contact)
+    }
 }
