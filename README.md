@@ -2,7 +2,7 @@
 
 #Libraries Used
 
-Retrofit \n  
+Retrofit  
 Viewmodel with LiveData
 RxJava
 Room
