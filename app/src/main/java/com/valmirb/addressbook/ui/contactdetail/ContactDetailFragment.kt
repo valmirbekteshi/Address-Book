@@ -8,18 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import com.valmirb.addressbook.R
 import com.valmirb.addressbook.db.entity.Contact
 import kotlinx.android.synthetic.main.contact_detail_fragment.*
 
 class ContactDetailFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ContactDetailFragment()
-    }
-
-    private lateinit var viewModel: ContactDetailViewModel
+    private lateinit var contactViewModel: ContactDetailViewModel
     private lateinit var contact: LiveData<Contact>
     private var contactId = -1
 
@@ -37,10 +32,10 @@ class ContactDetailFragment : Fragment() {
                 contactId = it
             }
         }
-        viewModel = ViewModelProviders.of(this).get(ContactDetailViewModel::class.java)
+        contactViewModel = ViewModelProviders.of(this).get(ContactDetailViewModel::class.java)
 
         if (contactId != -1) {
-            contact = viewModel.getContactDetail(contactId)
+            contact = contactViewModel.getContactDetail(contactId)
         }
 
 

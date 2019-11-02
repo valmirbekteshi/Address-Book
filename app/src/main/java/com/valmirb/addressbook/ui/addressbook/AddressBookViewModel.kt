@@ -17,7 +17,7 @@ class AddressBookViewModel(application: Application) : AndroidViewModel(applicat
         return allContacts
     }
 
-    fun searchByContact(name:String):Flowable<List<Contact>>{
+    fun searchByContact(name: String): Flowable<List<Contact>> {
         return repository.searchContactByName(name)
     }
 

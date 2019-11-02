@@ -22,16 +22,11 @@ import java.util.concurrent.TimeUnit
 
 class AddressBookFragment : Fragment(), ContactAdapter.Listener {
 
-    companion object {
-        fun newInstance() = AddressBookFragment()
-    }
 
-    private lateinit var viewModel: AddressBookViewModel
+    private lateinit var addressViewModel: AddressBookViewModel
     private lateinit var shareViewModel: ShareViewModel
     private val disposable: CompositeDisposable = CompositeDisposable()
-
-
-    lateinit var adapter: ContactAdapter
+    lateinit var contactAdapter: ContactAdapter
 
 
     override fun onCreateView(
@@ -43,10 +38,10 @@ class AddressBookFragment : Fragment(), ContactAdapter.Listener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AddressBookViewModel::class.java)
+        addressViewModel = ViewModelProviders.of(this).get(AddressBookViewModel::class.java)
         shareViewModel = ViewModelProviders.of(activity!!).get(ShareViewModel::class.java)
 
-        viewModel.getAllContacts().observe(this, object : Observer<List<Contact>> {
+        addressViewModel.getAllContacts().observe(this, object : Observer<List<Contact>> {
             override fun onChanged(list: List<Contact>?) {
 
                 if (list.isNullOrEmpty()) {
@@ -56,8 +51,8 @@ class AddressBookFragment : Fragment(), ContactAdapter.Listener {
                 }
 
                 list.let {
-                    adapter.clear()
-                    adapter.addContacts(it!!)
+                    contactAdapter.clear()
+                    contactAdapter.addContacts(it!!)
                 }
 
             }
@@ -65,15 +60,13 @@ class AddressBookFragment : Fragment(), ContactAdapter.Listener {
         })
 
         shareViewModel.onSearchLiveData.observe(this, Observer {
-
-
-            disposable.add(viewModel.searchByContact(it)
+            disposable.add(addressViewModel.searchByContact(it)
                 .subscribeOn(Schedulers.newThread())
-                .debounce (300, TimeUnit.MILLISECONDS)
+                .debounce(300, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    adapter.clear()
-                    adapter.addContacts(it)
+                    contactAdapter.clear()
+                    contactAdapter.addContacts(it)
                 }
             )
         })
@@ -85,19 +78,15 @@ class AddressBookFragment : Fragment(), ContactAdapter.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         emptyView.visibility = View.VISIBLE
-        setupView()
         setupRecyclerView()
     }
 
 
-    fun setupView() {
-    }
-
     fun setupRecyclerView() {
         val recyclerView = recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = ContactAdapter(context!!, this)
-        recyclerView.adapter = adapter
+        contactAdapter = ContactAdapter(context!!, this)
+        recyclerView.adapter = contactAdapter
 
     }
 

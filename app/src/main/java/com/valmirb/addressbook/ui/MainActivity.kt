@@ -1,12 +1,10 @@
 package com.valmirb.addressbook.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.SearchView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -16,10 +14,8 @@ import com.valmirb.addressbook.R
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navcontroller: NavController
-    private  var menuOption: Menu?= null
+    private var menuOption: Menu? = null
     private lateinit var shareViewModel: ShareViewModel
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,13 +23,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         shareViewModel = ViewModelProviders.of(this).get(ShareViewModel::class.java)
 
-        navcontroller  = Navigation.findNavController(this,R.id.nav_host_fragment)
-        NavigationUI.setupActionBarWithNavController(this,navcontroller)
+        navcontroller = Navigation.findNavController(this, R.id.nav_host_fragment)
+        NavigationUI.setupActionBarWithNavController(this, navcontroller)
 
         navcontroller.addOnDestinationChangedListener { controller, destination, arguments ->
 
             navcontroller.addOnDestinationChangedListener { _, destination, _ ->
-                if(destination.id == R.id.contactDetailFragment || destination.id == R.id.addContactFragment){
+                if (destination.id == R.id.contactDetailFragment || destination.id == R.id.addContactFragment) {
                     menuOption?.let {
                         it.findItem(R.id.search).setVisible(false)
                         it.findItem(R.id.add_contact).setVisible(false)
@@ -49,17 +45,17 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(navcontroller,null)
+        return NavigationUI.navigateUp(navcontroller, null)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         menuOption = menu
-        (  menuOption?.findItem(R.id.search)?.actionView as SearchView).setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+        (menuOption?.findItem(R.id.search)?.actionView as SearchView).setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return true
             }

@@ -12,11 +12,10 @@ import io.reactivex.Flowable
 interface ContactDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(note: Contact)
+    fun insert(contact: Contact)
 
     @Query("DELETE FROM contacts_table")
     fun deleteAllContacts()
-
 
     @Query("SELECT * FROM contacts_table ")
     fun getAllContacts(): LiveData<List<Contact>>
